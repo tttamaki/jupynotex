@@ -36,8 +36,14 @@ HIGHLIGHTERS = {
 # the different formats to be used when error or all ok
 FORMAT_ERROR = r"colback=red!5!white,colframe=red!75!"
 FORMAT_OK = (
-    r"coltitle=red!75!black, colbacktitle=black!10!white, "
-    r"halign title=right, fonttitle=\sffamily\mdseries\scshape\footnotesize")
+    r"breakable,"
+    r"coltitle=white,"
+    r"colbacktitle=blue!50!black,"
+    r"boxrule=0.5pt,"
+    # r"halign title=right,"
+    # r"boxed title style={skin=enhancedfirst jigsaw,arc=1mm,bottom=0mm,boxrule=0mm},"
+    r"fonttitle=\sffamily\mdseries\scshape\footnotesize"
+)
 
 # a little mark to put in the continuation line(s) when text is wrapped
 WRAP_MARK = "↳"
@@ -172,7 +178,7 @@ class ItemProcessor:
     def include_graphics(self, fname):
         """Wrap a filename in an includegraphics structure."""
         fname_no_backslashes = fname.replace("\\", "/")  # do not leave backslashes in Windows
-        width = self.cell_options.get("output-image-size", r"1\textwidth")
+        width = self.cell_options.get("output-image-size", r"\jupyimgwidth")
         return r"\includegraphics[width={}]{{{}}}".format(width, fname_no_backslashes)
 
     def listwrap(self, item):
@@ -351,7 +357,7 @@ def main(notebook_path, cells_spec, config_options):
 
         template = first_cell_id_template if cell == 1 else cells_id_template
         title = template.format(number=cell, filename=escaped_path_name)
-        print(r"\begin{{tcolorbox}}[{}, title={}]".format(FORMAT_OK, title))
+        print(r"\begin{{tcolorbox}}[{}]".format(FORMAT_OK))
         print(src)
         if out:
             print(r"\tcblower")
