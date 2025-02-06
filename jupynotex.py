@@ -249,6 +249,9 @@ class Notebook:
         outputs = content.get('outputs')
         if not outputs:
             return
+        use_output = self.cell_options.get("use-output", r"false")
+        if use_output in ["false", "False", "no", "NO", "No", "none"]:
+            return
 
         result = []
         processor = ItemProcessor(self.cell_options, self.config_options)
