@@ -24,12 +24,12 @@ including the latex log. Thanks!
 """
 
 # basic verbatim start/end
-VERBATIM_BEGIN = [r"\begin{footnotesize}", r"\begin{verbatim}"]
-VERBATIM_END = [r"\end{verbatim}", r"\end{footnotesize}"]
+VERBATIM_BEGIN = [r"\begin{minted}[fontsize=\footnotesize,breaklines]{text}"]
+VERBATIM_END = [r"\end{minted}"]
 
 # highlighers for different languages (block beginning and ending)
 HIGHLIGHTERS = {
-    'python': ([r'\begin{minted}[fontsize=\footnotesize]{python}'], [r'\end{minted}']),
+    'python': ([r'\begin{minted}[fontsize=\footnotesize,breaklines,linenos,xleftmargin=0.75em,mathescape=true]{python}'], [r'\end{minted}']),
     None: (VERBATIM_BEGIN, VERBATIM_END),
 }
 
