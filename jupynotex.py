@@ -43,7 +43,7 @@ FORMAT_OK = (
     # r"halign title=right,"
     # r"boxed title style={skin=enhancedfirst jigsaw,arc=1mm,bottom=0mm,boxrule=0mm},"
     r"fonttitle=\sffamily\mdseries\scshape\footnotesize,"
-    r"nobeforeafter,beforeafter skip=0.5\baselineskip"
+    r"beforeafter skip=0.5\baselineskip,bottom=0mm,top=0mm,middle=0mm"
 )
 
 # a little mark to put in the continuation line(s) when text is wrapped
