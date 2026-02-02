@@ -324,6 +324,21 @@ class Notebook:
                 options[k] = v
                 continue
 
+            # check if it's a tag specification
+            if group.startswith('tag:'):
+                tag_name = group[4:]  # remove 'tag:' prefix
+                partial = "a"
+                if tag_name.endswith(('i', 'o')):
+                    partial = tag_name[-1]
+                    tag_name = tag_name[:-1]
+
+                # find all cells with this tag
+                for idx, cell in enumerate(self._cells, start=1):
+                    cell_tags = cell.get('metadata', {}).get('tags', [])
+                    if tag_name in cell_tags:
+                        cells.add(CellSelection(idx, partial=partial))
+                continue
+
             # if there is a partial indication, save it and remove it from the rest of processing
             partial = "a"
             if group[-1] in "io":
@@ -350,7 +365,7 @@ class Notebook:
             raise ValueError("Cells need to be >=1")
         if len(cells) != len(set(cell.index for cell in cells)):
             raise ValueError("Mixed different parts indication for the same cell.")
-        if maxlen < cells[-1].index:
+        if cells and maxlen < cells[-1].index:
             raise ValueError(f"Notebook loaded of len {maxlen}, smaller than requested cells")
 
         self.cell_options = options
