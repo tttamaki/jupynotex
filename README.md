@@ -73,6 +73,16 @@ Cell options available:
 - `output-image-size=SIZE` where SIZE is a valid .tex size (a number with an unit, e.g. `70mm`); it will set any image in the output of those cells to the indicated size
 
 
+## Notebook path prefix
+
+If your notebooks live in another directory, you can set a path prefix that will be prepended to the notebook file name given to every following `\jupynotex` command (it is empty by default):
+
+    \setnotebookpath{./notebook1/}
+    \jupynotex[1-3]{sample.ipynb}   % reads ./notebook1/sample.ipynb
+
+Note the prefix is prepended as is, so include the trailing slash. It can be changed at any point in the document, and reset with `\setnotebookpath{}`.
+
+
 ## Full Example
 
 Check the `example` directory in this project.

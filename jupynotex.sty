@@ -23,8 +23,13 @@
 
 \ProcessPgfPackageOptions{/jupynotex}
 
+% Path prefix prepended to the notebook path given to \jupynotex (empty by default)
+% e.g. \setnotebookpath{./notebook1/}
+\newcommand*\jupynotex@notebookpath{}
+\newcommand*\setnotebookpath[1]{\def\jupynotex@notebookpath{#1}}
+
 \newcommand{\jupynotex}[2][-]{
-    \input|"python3 jupynotex.py '#2' '#1' '\jupynotex@outputtextlimit@value' '\jupynotex@cellsidtemplate@value' '\jupynotex@firstcellidtemplate@value'"
+    \input|"python3 jupynotex.py '\jupynotex@notebookpath#2' '#1' '\jupynotex@outputtextlimit@value' '\jupynotex@cellsidtemplate@value' '\jupynotex@firstcellidtemplate@value'"
 }
 
 \endinput
